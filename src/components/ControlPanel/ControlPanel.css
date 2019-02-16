@@ -2,6 +2,7 @@
   display: block;
   margin: 0 auto;
   cursor: pointer;
+  touch-action: none;
 }
 
 .control-title {
