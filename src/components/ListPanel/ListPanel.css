@@ -5,15 +5,17 @@
 
 .list-panel-item {
   background-color: #B0B0B0;
-  padding-top: 15px;
-  padding-bottom: 15px;
   margin-bottom: 10px;
-  text-align: center;
 }
 
 .list-panel-button {
+  text-align: center;
+  display: block;
   background-color: transparent;
   border: none;
   font-size: 16px;
   color: #fff;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  width: 100%;
 }
