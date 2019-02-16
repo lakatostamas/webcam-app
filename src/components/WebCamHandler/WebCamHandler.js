@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ListPanelContainer from '../ListPanel/ListPanelContainer';
+import WebcamView from '../WebcamView/WebcamView';
 
 class WebCamHandler extends Component {
   constructor(props) {
@@ -20,7 +21,10 @@ class WebCamHandler extends Component {
     const { activeSource } = this.state;
     console.log(activeSource);
     return (
-      <ListPanelContainer onListItemClick={this.onListItemClick} />
+      <>
+        <ListPanelContainer onListItemClick={this.onListItemClick} />
+        <WebcamView activeSource={activeSource} />
+      </>
     );
   }
 }
