@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import WebcamView from '../WebcamView/WebcamView';
+import WebcamView from './WebcamView';
 
 const props = {
   position: {
