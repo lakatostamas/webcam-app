@@ -14,7 +14,12 @@ class WebcamView extends Component {
   }
 
   componentDidUpdate() {
-    const { activeSource } = this.props;
+    const { activeSource, position, afterPositionChange } = this.props;
+
+    if (Object.keys(position).length) {
+      window.WebCam.move(position.x, position.y);
+      afterPositionChange();
+    }
 
     if (activeSource === this.lastActiveSource) {
       return;
@@ -33,10 +38,16 @@ class WebcamView extends Component {
 
 WebcamView.defaultProps = {
   activeSource: '',
+  position: {},
 };
 
 WebcamView.propTypes = {
   activeSource: PropTypes.string,
+  position: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number,
+  }),
+  afterPositionChange: PropTypes.func.isRequired,
 };
 
 export default WebcamView;

@@ -2,14 +2,27 @@ import React, { Component } from 'react';
 import ListPanelContainer from '../ListPanel/ListPanelContainer';
 import WebcamView from '../WebcamView/WebcamView';
 import ToggleListPanel from '../ToggleListPanel/ToggleListPanel';
+import ControlPanel from '../ControlPanel/ControlPanel';
 
 class WebCamHandler extends Component {
   constructor(props) {
     super(props);
     this.onListItemClick = this.onListItemClick.bind(this);
+    this.onPositionChange = this.onPositionChange.bind(this);
+    this.afterPositionChange = this.afterPositionChange.bind(this);
     this.state = {
       activeSource: '',
+      position: {},
     };
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const { position } = this.state;
+    if (Object.keys(position).length && !Object.keys(nextState.position).length) {
+      return false;
+    }
+
+    return true;
   }
 
   onListItemClick(source) {
@@ -18,12 +31,27 @@ class WebCamHandler extends Component {
     });
   }
 
+  onPositionChange(position) {
+    this.setState({
+      position,
+    });
+  }
+
+  afterPositionChange() {
+    this.setState({
+      position: {},
+    });
+  }
+
   render() {
-    const { activeSource } = this.state;
-    console.log(activeSource);
+    const { activeSource, position } = this.state;
     return (
       <>
-        <WebcamView activeSource={activeSource} />
+        <WebcamView
+          activeSource={activeSource}
+          position={position}
+          afterPositionChange={this.afterPositionChange}
+        />
         <ToggleListPanel>
           {[
             {
@@ -32,7 +60,7 @@ class WebCamHandler extends Component {
             },
             {
               label: 'Control',
-              content: <div>control</div>,
+              content: <ControlPanel onPositionChange={this.onPositionChange} />,
             },
           ]}
         </ToggleListPanel>
