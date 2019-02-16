@@ -3,3 +3,9 @@
   justify-content: center;
   margin-top: 5%;
 }
+
+@media(max-width: 1040px) {
+  #root {
+    flex-direction: column;
+  }
+}

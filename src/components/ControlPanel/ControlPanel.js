@@ -12,22 +12,26 @@ class ControlPanel extends Component {
     };
   }
 
-  onMouseDown({ pageX, pageY }) {
+  onMouseDown(ev) {
+    ev.preventDefault();
+    const { pageX, pageY, touches } = ev;
     this.setState({
       startPosition: {
-        x: pageX,
-        y: pageY,
+        x: pageX !== undefined ? pageX : touches[0].clientX,
+        y: pageY !== undefined ? pageY : touches[0].clientY,
       },
     });
   }
 
-  onMouseUp({ pageX, pageY }) {
+  onMouseUp(ev) {
+    ev.preventDefault();
+    const { pageX, pageY, changedTouches } = ev;
     const { startPosition } = this.state;
     const { onPositionChange } = this.props;
 
     onPositionChange({
-      x: startPosition.x - pageX,
-      y: startPosition.y - pageY,
+      x: startPosition.x - (pageX !== undefined ? pageX : changedTouches[0].clientX),
+      y: startPosition.y - (pageY !== undefined ? pageY : changedTouches[0].clientY),
     });
   }
 
@@ -38,11 +42,20 @@ class ControlPanel extends Component {
         <svg
           height="230px"
           width="300px"
-          onMouseDown={this.onMouseDown}
-          onMouseUp={this.onMouseUp}
           className="control-circle"
         >
-          <circle cx="150" cy="120" r="100" stroke="black" strokeWidth="3" fill="#fff" />
+          <circle
+            cx="150"
+            cy="120"
+            r="100"
+            stroke="#000"
+            strokeWidth="3"
+            fill="#fff"
+            onMouseDown={this.onMouseDown}
+            onMouseUp={this.onMouseUp}
+            onTouchStart={this.onMouseDown}
+            onTouchEnd={this.onMouseUp}
+          />
         </svg>
       </>
     );
