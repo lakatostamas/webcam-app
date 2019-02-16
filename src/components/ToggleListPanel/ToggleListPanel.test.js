@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import ToggleListPanel from '../ToggleListPanel/ToggleListPanel';
+import ToggleListPanel from './ToggleListPanel';
 
 const props = {
   children: [
@@ -11,7 +11,7 @@ const props = {
     {
       label: 'bar',
       content: <div>bar</div>,
-    }
+    },
   ],
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import ListPanel from '../ListPanel/ListPanel';
+import ListPanel from './ListPanel';
 
 const props = {
   webcams: [
