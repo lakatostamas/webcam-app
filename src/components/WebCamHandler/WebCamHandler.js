@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ListPanelContainer from '../ListPanel/ListPanelContainer';
 import WebcamView from '../WebcamView/WebcamView';
-import './WebCamHandler.css'
+import ToggleListPanel from '../ToggleListPanel/ToggleListPanel';
 
 class WebCamHandler extends Component {
   constructor(props) {
@@ -24,9 +24,18 @@ class WebCamHandler extends Component {
     return (
       <>
         <WebcamView activeSource={activeSource} />
-        <div className="panel-container">
-          <ListPanelContainer onListItemClick={this.onListItemClick} />
-        </div>
+        <ToggleListPanel>
+          {[
+            {
+              label: 'Cameras',
+              content: <ListPanelContainer onListItemClick={this.onListItemClick} />,
+            },
+            {
+              label: 'Control',
+              content: <div>control</div>,
+            },
+          ]}
+        </ToggleListPanel>
       </>
     );
   }
