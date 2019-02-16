@@ -33,6 +33,9 @@ class ControlPanel extends Component {
       x: startPosition.x - (pageX !== undefined ? pageX : changedTouches[0].clientX),
       y: startPosition.y - (pageY !== undefined ? pageY : changedTouches[0].clientY),
     });
+    this.setState({
+      startPosition: {},
+    });
   }
 
   render() {
